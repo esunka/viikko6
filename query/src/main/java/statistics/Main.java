@@ -11,24 +11,20 @@ public class Main {
 
         Statistics stats = new Statistics(new PlayerReaderImpl(url));
           
-        Matcher m = new And( 
-            new Not( new HasAtLeast(1, "goals") ), 
-            new PlaysIn("NYR")
+        Matcher m = new And(
+            new HasAtLeast(20, "points"),
+            new Or( 
+                new PlaysIn("NYR"),
+                new PlaysIn("NYI"),
+                new PlaysIn("NJD")
+            )
         );
         
         
         for (Player player : stats.matches(m)) {
             System.out.println(player);
         }
-        System.out.println("------");
-        Matcher m2 = new And( 
-            new HasFewerThan(1, "goals"), 
-            new PlaysIn("NYR")
-        );
 
-        for (Player player : stats.matches(m2)) {
-            System.out.println(player);
-        }
 
     }
 }
